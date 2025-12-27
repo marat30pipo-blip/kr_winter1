@@ -17,14 +17,16 @@ public class Main {
 
         CryptoChain current = cryptoChain1;
         int i = 0;
+        System.out.println("шаг " + i );
         String result1 = current.getValue() + i;
+        System.out.println("его сообщение " + result1);
         char[] resultChar1 = new char[result1.length()];
         for (int j = 0; j < result1.length(); j++) {
             resultChar1[j] = result1.charAt(j);
         }
         current.getNext().setString(current.encrypt(resultChar1));
         current = current.getNext();
-        System.out.println(current.getValue());
+        System.out.println("зашифрованное сообщение " + current.getValue());
         i++;
 
 
@@ -34,11 +36,13 @@ public class Main {
             for (int j = 0; j < res.length; j++) {
                 res[j] = (int) current.getValue().charAt(j);
             }
-            System.out.println(Arrays.toString(res));
+            System.out.println("массив из зашифрованных элементов" + Arrays.toString(res));
             char[] resChar = current.decrypt(res);
 //            добавили номер
+            System.out.println("шаг " + i);
             String resString = new String(resChar) + i;
 //            зашифровка
+            System.out.println("его сообщение " + resString);
             char[] resStringChar = new char[resString.length()];
             for (int j = 0; j < resString.length(); j++) {
                 resStringChar[j] = resString.charAt(j);
@@ -47,17 +51,20 @@ public class Main {
 
             current.getNext().setString(current.encrypt(resStringChar));
             current = current.getNext();
-            System.out.println(current.getValue());
+            System.out.println("зашифрованное сообщение " + current.getValue());
             i++;
         }
         int[] resLast = new int[current.getValue().length()];
         for (int j = 0; j < resLast.length; j++) {
             resLast[j] = (int) current.getValue().charAt(j);
         }
+        System.out.println("массив из зашифрованных элементов " + Arrays.toString(resLast));
         char[] resLastChar = current.decrypt(resLast);
+        System.out.println("шаг " + i);
         String resLastString = new String(resLastChar) + i;
 
-        System.out.println(resLastString);
+        System.out.println("финальное сообщение " + resLastString);
+
     }
 
 }
